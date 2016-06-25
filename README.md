@@ -1,4 +1,4 @@
-# FPPiS-week02-Object-Oriented-Sets
+# FPPiS-week03-Object-Oriented-Sets [![Build Status](https://travis-ci.org/christiangda/FPPiS-week03-Object-Oriented-Sets.png)](https://travis-ci.org/christiangda/FPPiS-week03-Object-Oriented-Sets)
 
 ## Object-Oriented Sets
 
