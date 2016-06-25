@@ -109,6 +109,7 @@ abstract class TweetSet {
 }
 
 class Empty extends TweetSet {
+
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
 
   def union(that: TweetSet): TweetSet = that
@@ -141,8 +142,17 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     else left.filterAcc(p, right.filterAcc(p, acc))
   }
 
+  /**
+   * def union(that: TweetSet): TweetSet = {
+   * if(this.isEmpty) that
+   * else if (that.isEmpty) this
+   * else left.union(right.union(that.incl(elem)))
+   * }
+   */
   def union(that: TweetSet): TweetSet = {
-    left.union(right.union(that.incl(elem)))
+    if (this.isEmpty) that
+    else if (that.isEmpty) this
+    else that.filterAcc(t => true, this)
   }
 
   def isEmpty: Boolean = false
@@ -157,12 +167,11 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     else if (right.isEmpty) max(left.mostRetweeted, elem)
     else if (left.isEmpty) max(right.mostRetweeted, elem)
     else max(left.mostRetweeted, max(left.mostRetweeted, elem))
-
   }
 
   def descendingByRetweet: TweetList = {
-      val mr = mostRetweeted
-      new Cons(mr, remove(mr).descendingByRetweet)
+    val mr = mostRetweeted
+    new Cons(mr, remove(mr).descendingByRetweet)
   }
 
   /**
