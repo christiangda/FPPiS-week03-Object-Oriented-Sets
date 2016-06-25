@@ -76,17 +76,18 @@ class TweetSetSuite extends FunSuite {
   test("mostRetweeted: on set5") {
     new TestSets {
       val t = set5.mostRetweeted
-      assert(t.text == "a body")
+      assert(t.text == "a body" || t.text == "b body")
     }
   }
 
   test("descendingByRetweet: on set5") {
     new TestSets {
       val t = set5.descendingByRetweet
-      val o = new Tweet("a", "a body", 20)
+      val o1 = new Tweet("a", "a body", 20)
+      val o2 = new Tweet("b", "b body", 20)
       assert(!t.isEmpty)
-      assert(t.head.user === o.user)
-      assert(t.head.text === o.text)
+      assert(t.head.user === o1.user || t.head.user === o2.user)
+      assert(t.head.text === o1.text || t.head.text === o2.text)
     }
   }
 

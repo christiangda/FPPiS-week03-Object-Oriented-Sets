@@ -163,10 +163,21 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       if (t1.retweets > t2.retweets) t1 else t2
     }
 
-    if (left.isEmpty && right.isEmpty) elem
-    else if (right.isEmpty) max(left.mostRetweeted, elem)
-    else if (left.isEmpty) max(right.mostRetweeted, elem)
-    else max(left.mostRetweeted, max(left.mostRetweeted, elem))
+    //    if (left.isEmpty && right.isEmpty) elem
+    //    else if (right.isEmpty) max(left.mostRetweeted, elem)
+    //    else if (left.isEmpty) max(right.mostRetweeted, elem)
+    //    else max(left.mostRetweeted, max(left.mostRetweeted, elem))
+
+    if (right.isEmpty && left.isEmpty) {
+      elem
+    } else if (right.isEmpty && !left.isEmpty) {
+      max(elem, left.mostRetweeted)
+    } else if (!right.isEmpty && left.isEmpty) {
+      max(elem, right.mostRetweeted)
+    } else {
+      val childMax = max(left.mostRetweeted, right.mostRetweeted)
+      max(elem, childMax)
+    }
   }
 
   def descendingByRetweet: TweetList = {
