@@ -64,9 +64,10 @@ define the union method (should it be abstract in class TweetSet?).
 The more often a tweet is “re-tweeted” (that is, repeated by a different user
   with or without additions), the more influential it is.
 
-The goal of this part of the exercise is to add a method descendingByRetweet to
-TweetSet which should produce a linear sequence of
-tweets (as an instance of class TweetList), ordered by their number of retweets:
+The goal of this part of the exercise is to add a `method descendingByRetweet`
+to `TweetSet` which should produce a linear sequence of
+tweets (as an instance of `class TweetList`), ordered by their number
+of retweets:
 
 ```scala
 def descendingByRetweet: TweetList
