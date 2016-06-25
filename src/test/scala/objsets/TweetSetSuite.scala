@@ -2,7 +2,6 @@ package objsets
 
 import org.scalatest.FunSuite
 
-
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
@@ -63,6 +62,15 @@ class TweetSetSuite extends FunSuite {
     }
   }
 
+  test("descending: on empty set") {
+    new TestSets {
+      val trends = set1.descendingByRetweet
+      intercept[NoSuchElementException] {
+        trends.head.user
+      }
+    }
+  }
+
   test("descending: set5") {
     new TestSets {
       val trends = set5.descendingByRetweet
@@ -70,5 +78,4 @@ class TweetSetSuite extends FunSuite {
       assert(trends.head.user == "a" || trends.head.user == "b")
     }
   }
-
-  }
+}
